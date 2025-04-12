@@ -1,0 +1,12 @@
+.resume {
+        fill: #ffffff;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 40px;
+        font-weight: 500;
+      }
+      .ai {
+        fill: url(#grad1);
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 40px;
+        font-weight: 600;
+      }

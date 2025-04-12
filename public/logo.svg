@@ -1,0 +1,27 @@
+<svg width="400" height="100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .resume {
+      fill: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 40px;
+      font-weight: 500;
+    }
+    .ai {
+      fill: url(#grad1);
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 40px;
+      font-weight: 600;
+    }
+  </style>
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4B0082; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E8B57; stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#0a0a0a"/>
+  <text x="20" y="60">
+    <tspan class="resume">Resume</tspan>
+    <tspan class="ai">Ai</tspan>
+  </text>
+</svg>
