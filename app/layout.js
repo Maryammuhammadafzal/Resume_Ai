@@ -25,14 +25,14 @@ export default function RootLayout({ children }) {
           className={` ${inter.className} `}
         >
           <ThemeProvider
-            attribute="className"
+            attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
             {/* Header */}
             {/* */}
-            <header className='w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 h-[80px] '>
+            <header className='w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 h-[80px]'>
               <Header />
             </header>
             {/* Main */}

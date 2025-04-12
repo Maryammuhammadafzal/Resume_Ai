@@ -122,7 +122,7 @@
 }
 
 .grid-background {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -134,7 +134,7 @@
   ), 
    linear-gradient(
     to bottom ,
-    rgba(255, 255, 255, 0.04) 1px ,
+    rgba(255, 255, 255, 0.1) 1px ,
     transparent 1px
   );
   background-size: 50px 50px;
@@ -149,5 +149,26 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle , transparent , rgba(0, 21, 9, 0.766))
+  background: radial-gradient(circle , transparent , rgba(0, 21, 9, 0.9))
+}
+
+@layer utilities {
+
+  .gradient-title {
+    @apply bg-gradient-to-b from-gray-400 via-gray-200 to-gray-600 font-extrabold tracking-tighter text-transparent bg-clip-text pb-2 pr-2
+  }
+}
+
+.hero-image-wrapper {
+  perspective: 1000px;
+}
+
+.hero-image{
+  transform:  rotateX(15deg) scale(1);
+  transition:  transform 0.5s ease-out;
+  will-change: transition;
+}
+
+.hero-image.scrolled {
+  transform: rotateX(0deg) scale(1) translateY(80px);
 }
