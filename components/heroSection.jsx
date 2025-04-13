@@ -29,8 +29,8 @@ const HeroSection = () => {
 
   return (
     <section className="w-full pt-36 md:pt-38 space-y-8 pb-10">
-      <div className="space-y-8 text-center">
-        <div className="space-y-8 mx-auto">
+      <div className="space-y-6 text-center">
+        <div className="space-y-6 mx-auto">
           <h1 className="text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold gradient-title">
             You Ai Career Coach for
             <br />
@@ -56,7 +56,7 @@ const HeroSection = () => {
       </div>
 
       <div className="hero-image-wrapper mt-5 md:mt-0 ">
-        <div ref={imageRef} className="hero-image">
+        <div ref={imageRef} className="hero-image relative">
           <Image
             src={BannerImage}
             alt={"Hero Image"}
@@ -65,6 +65,7 @@ const HeroSection = () => {
             className={`rounded-2xl h-[650px] shadow-xl border mx-auto`}
             priority
           />
+          <div className="bg-[rgba(0, 21, 9, 0.9)] opacity-25 absolute top-0 left-0"></div>
         </div>
       </div>
     </section>
