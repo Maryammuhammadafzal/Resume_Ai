@@ -26,8 +26,13 @@ import Image from "next/image";
 import { FileText } from "lucide-react";
 import { GraduationCap } from "lucide-react";
 import { PenBox } from "lucide-react";
+import { checkUser } from "@/lib/checkUser";
 
-const Header = () => {
+const Header = async () => {
+
+  // Check the user logging
+  await checkUser();
+
   return (
     <>
       <nav className="container fixed top-0 mx-auto z-50 px-4 h-16 flex items-center justify-between">

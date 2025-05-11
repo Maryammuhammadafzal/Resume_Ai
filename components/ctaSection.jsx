@@ -6,8 +6,8 @@ import { Button } from "./ui/button";
 const CTASection = () => {
   return (
     <section className="w-full">
-      <div className="mx-auto py-6 bg-gradient-to-b from-gray-400 via-gray-200 to-gray-300 rounded-lg">
-        <div className="flex flex-col items-center justify-center space-y-4 text-cent max-w-3xl mx-auto">
+      <div className="mx-auto py-24 gradient rounded-lg">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-4 tracking-trighter text-primary-foreground sm:text-4xl md:text-5xl">
             Ready to Accelerate Your Carrer
           </h2>
@@ -19,7 +19,7 @@ const CTASection = () => {
           <Button
             size={"lg"}
             variant={"primary"}
-            className={`h-11 mt-5 animate-bounce`}
+            className={`h-11 mt-5 animate-bounce bg-black`}
           >
             Start Your Journey Today <ArrowRight className="h-4 w-4 ml-2" />
           </Button>
