@@ -5,6 +5,7 @@ import "./index.css"
 import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,8 @@ export default function RootLayout({ children }) {
               <Header />
             </header>
             {/* Main */}
-            <div className="min-h-screen w-full"> {children}</div>
+            <main className="min-h-screen w-full"> {children}</main>
+            <Toaster richColors />
             {/* Footer */}
             <footer className="bg-muted/50 py-4">
               <div className="container mx-auto px-4 text-center"></div>

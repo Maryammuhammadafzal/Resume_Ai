@@ -28,7 +28,7 @@ model User {
 
   //profile Feilds
   bio        String?
-  experience String?
+  experience Int?
   skills     String[] //Array of skils
 
   assessments Assessments[]

@@ -302,8 +302,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -1340,8 +1340,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    experience: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    experience: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1354,7 +1364,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     bio: string | null
-    experience: string | null
+    experience: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1367,7 +1377,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     bio: string | null
-    experience: string | null
+    experience: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1385,6 +1395,14 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    experience?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    experience?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -1465,6 +1483,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1495,6 +1525,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -1509,9 +1541,11 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     bio: string | null
-    experience: string | null
+    experience: number | null
     skills: string[]
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1626,7 +1660,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       bio: string | null
-      experience: string | null
+      experience: number | null
       skills: string[]
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2064,7 +2098,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly bio: FieldRef<"User", 'String'>
-    readonly experience: FieldRef<"User", 'String'>
+    readonly experience: FieldRef<"User", 'Int'>
     readonly skills: FieldRef<"User", 'String[]'>
   }
     
@@ -7159,6 +7193,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -7212,20 +7260,6 @@ export namespace Prisma {
    */
   export type ListEnumMarketOutlookFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MarketOutlook[]'>
     
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
   /**
    * Deep Input Types
    */
@@ -7244,7 +7278,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     bio?: StringNullableFilter<"User"> | string | null
-    experience?: StringNullableFilter<"User"> | string | null
+    experience?: IntNullableFilter<"User"> | number | null
     skills?: StringNullableListFilter<"User">
     industryInsight?: XOR<IndustryInsightNullableScalarRelationFilter, IndustryInsightWhereInput> | null
     assessments?: AssessmentsListRelationFilter
@@ -7283,7 +7317,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     bio?: StringNullableFilter<"User"> | string | null
-    experience?: StringNullableFilter<"User"> | string | null
+    experience?: IntNullableFilter<"User"> | number | null
     skills?: StringNullableListFilter<"User">
     industryInsight?: XOR<IndustryInsightNullableScalarRelationFilter, IndustryInsightWhereInput> | null
     assessments?: AssessmentsListRelationFilter
@@ -7304,8 +7338,10 @@ export namespace Prisma {
     experience?: SortOrderInput | SortOrder
     skills?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -7321,7 +7357,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
-    experience?: StringNullableWithAggregatesFilter<"User"> | string | null
+    experience?: IntNullableWithAggregatesFilter<"User"> | number | null
     skills?: StringNullableListFilter<"User">
   }
 
@@ -7618,7 +7654,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     industryInsight?: IndustryInsightCreateNestedOneWithoutUsersInput
     assessments?: AssessmentsCreateNestedManyWithoutUserInput
@@ -7636,7 +7672,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     assessments?: AssessmentsUncheckedCreateNestedManyWithoutUserInput
     resume?: ResumeUncheckedCreateNestedOneWithoutUserInput
@@ -7652,7 +7688,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     industryInsight?: IndustryInsightUpdateOneWithoutUsersNestedInput
     assessments?: AssessmentsUpdateManyWithoutUserNestedInput
@@ -7670,7 +7706,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     assessments?: AssessmentsUncheckedUpdateManyWithoutUserNestedInput
     resume?: ResumeUncheckedUpdateOneWithoutUserNestedInput
@@ -7687,7 +7723,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
   }
 
@@ -7700,7 +7736,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
   }
 
@@ -7714,7 +7750,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
   }
 
@@ -8068,6 +8104,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
@@ -8125,6 +8172,10 @@ export namespace Prisma {
     skills?: SortOrder
   }
 
+  export type UserAvgOrderByAggregateInput = {
+    experience?: SortOrder
+  }
+
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     clerkUserId?: SortOrder
@@ -8148,6 +8199,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     bio?: SortOrder
+    experience?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
     experience?: SortOrder
   }
 
@@ -8199,6 +8254,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -8491,6 +8562,14 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateskillsInput = {
     set?: string[]
     push?: string | string[]
@@ -8766,6 +8845,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8811,17 +8901,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8834,6 +8913,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedFloatFilter<$PrismaModel = never> = {
@@ -9142,7 +9248,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     industryInsight?: IndustryInsightCreateNestedOneWithoutUsersInput
     resume?: ResumeCreateNestedOneWithoutUserInput
@@ -9159,7 +9265,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     resume?: ResumeUncheckedCreateNestedOneWithoutUserInput
     coverLetter?: CoverLetterUncheckedCreateNestedManyWithoutUserInput
@@ -9190,7 +9296,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     industryInsight?: IndustryInsightUpdateOneWithoutUsersNestedInput
     resume?: ResumeUpdateOneWithoutUserNestedInput
@@ -9207,7 +9313,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     resume?: ResumeUncheckedUpdateOneWithoutUserNestedInput
     coverLetter?: CoverLetterUncheckedUpdateManyWithoutUserNestedInput
@@ -9222,7 +9328,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     industryInsight?: IndustryInsightCreateNestedOneWithoutUsersInput
     assessments?: AssessmentsCreateNestedManyWithoutUserInput
@@ -9239,7 +9345,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     assessments?: AssessmentsUncheckedCreateNestedManyWithoutUserInput
     coverLetter?: CoverLetterUncheckedCreateNestedManyWithoutUserInput
@@ -9270,7 +9376,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     industryInsight?: IndustryInsightUpdateOneWithoutUsersNestedInput
     assessments?: AssessmentsUpdateManyWithoutUserNestedInput
@@ -9287,7 +9393,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     assessments?: AssessmentsUncheckedUpdateManyWithoutUserNestedInput
     coverLetter?: CoverLetterUncheckedUpdateManyWithoutUserNestedInput
@@ -9302,7 +9408,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     industryInsight?: IndustryInsightCreateNestedOneWithoutUsersInput
     assessments?: AssessmentsCreateNestedManyWithoutUserInput
@@ -9319,7 +9425,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     assessments?: AssessmentsUncheckedCreateNestedManyWithoutUserInput
     resume?: ResumeUncheckedCreateNestedOneWithoutUserInput
@@ -9350,7 +9456,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     industryInsight?: IndustryInsightUpdateOneWithoutUsersNestedInput
     assessments?: AssessmentsUpdateManyWithoutUserNestedInput
@@ -9367,7 +9473,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     assessments?: AssessmentsUncheckedUpdateManyWithoutUserNestedInput
     resume?: ResumeUncheckedUpdateOneWithoutUserNestedInput
@@ -9382,7 +9488,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     assessments?: AssessmentsCreateNestedManyWithoutUserInput
     resume?: ResumeCreateNestedOneWithoutUserInput
@@ -9398,7 +9504,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
     assessments?: AssessmentsUncheckedCreateNestedManyWithoutUserInput
     resume?: ResumeUncheckedCreateNestedOneWithoutUserInput
@@ -9444,7 +9550,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     bio?: StringNullableFilter<"User"> | string | null
-    experience?: StringNullableFilter<"User"> | string | null
+    experience?: IntNullableFilter<"User"> | number | null
     skills?: StringNullableListFilter<"User">
   }
 
@@ -9537,7 +9643,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     bio?: string | null
-    experience?: string | null
+    experience?: number | null
     skills?: UserCreateskillsInput | string[]
   }
 
@@ -9550,7 +9656,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     assessments?: AssessmentsUpdateManyWithoutUserNestedInput
     resume?: ResumeUpdateOneWithoutUserNestedInput
@@ -9566,7 +9672,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
     assessments?: AssessmentsUncheckedUpdateManyWithoutUserNestedInput
     resume?: ResumeUncheckedUpdateOneWithoutUserNestedInput
@@ -9582,7 +9688,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableIntFieldUpdateOperationsInput | number | null
     skills?: UserUpdateskillsInput | string[]
   }
 
