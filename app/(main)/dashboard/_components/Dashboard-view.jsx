@@ -1,8 +1,16 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { format, formatDistanceToNow } from "date-fns";
 import { LineChart, TrendingDown, TrendingUp } from "lucide-react";
 import React from "react";
-
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 const DashboardView = ({ insights }) => {
   const salaryData = insights.salaryRanges.map((range) => ({
     name: range.role,
@@ -37,12 +45,67 @@ const DashboardView = ({ insights }) => {
     }
   };
 
-  const outlookInfo = getMarketOutlookInfo(insights.marketOutlook).icon;
-  const outlookColor = getMarketOutlookInfo(insights.marketOutlook).color;
+  const OutlookIcon = getMarketOutlookInfo(insights.marketOutlook).icon;
+  const OutlookColor = getMarketOutlookInfo(insights.marketOutlook).color;
 
-  const lastUpdated = format(new Date(insights.lastUpdated), "dd/MM/yyyy");
-  const nextUpdateDistance = formatDistanceToNow(new Date(insights.nextupdate), {addSuffix : true})
-  return <div>Insights</div>;
+  const lastUpdatedDate = format(new Date(insights.lastUpdated), "dd/MM/yyyy");
+  const nextUpdateDistance = formatDistanceToNow(
+    new Date(insights.nextUpdate),
+    { addSuffix: true }
+  );
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <Badge variant="outline">Last updated: {lastUpdatedDate}</Badge>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card>
+          <CardHeader className=" flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Market Outlook</CardTitle>
+            <OutlookIcon className={`h-4 w-4 ${OutlookColor}`} /> 
+          </CardHeader>
+          <CardContent>
+                <div className="text-2xl font-bold">{insights.marketOutlook}</div>
+            <p className="text-xs text-muted-foreground">Next Updated {nextUpdateDistance}</p>
+          </CardContent>
+          
+        </Card>
+        <Card>
+          <CardHeader className=" flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Market Outlook</CardTitle>
+            <OutlookIcon className={`h-4 w-4 ${OutlookColor}`} /> 
+          </CardHeader>
+          <CardContent>
+                <div className="text-2xl font-bold">{insights.marketOutlook}</div>
+            <p className="text-xs text-muted-foreground">Next Updated {nextUpdateDistance}</p>
+          </CardContent>
+          
+        </Card>
+        <Card>
+          <CardHeader className=" flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Market Outlook</CardTitle>
+            <OutlookIcon className={`h-4 w-4 ${OutlookColor}`} /> 
+          </CardHeader>
+          <CardContent>
+                <div className="text-2xl font-bold">{insights.marketOutlook}</div>
+            <p className="text-xs text-muted-foreground">Next Updated {nextUpdateDistance}</p>
+          </CardContent>
+          
+        </Card>
+        <Card>
+          <CardHeader className=" flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Market Outlook</CardTitle>
+            <OutlookIcon className={`h-4 w-4 ${OutlookColor}`} /> 
+          </CardHeader>
+          <CardContent>
+                <div className="text-2xl font-bold">{insights.marketOutlook}</div>
+            <p className="text-xs text-muted-foreground">Next Updated {nextUpdateDistance}</p>
+          </CardContent>
+          
+        </Card>
+      </div>
+    </div>
+  );
 };
 
 export default DashboardView;
