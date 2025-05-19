@@ -18,7 +18,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 const DashboardView = ({ insights }) => {
   const salaryData = insights.salaryRanges.map((range) => ({
     name: range.role,
@@ -61,6 +70,8 @@ const DashboardView = ({ insights }) => {
     new Date(insights.nextUpdate),
     { addSuffix: true }
   );
+  console.log(insights);
+  
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -134,88 +145,84 @@ const DashboardView = ({ insights }) => {
       </div>
 
       <Card>
+        <CardHeader>
+          <CardTitle>Salary Ranges by Role</CardTitle>
+          <CardDescription>
+            Displaying minimum, median, and maximum salaries (in thousands)
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={salaryData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip
+                  content={({ active, payload, label }) => {
+                    if (active && payload && payload.length) {
+                      return (
+                        <div className="bg-background rounded-lg p-2 border shadow-md">
+                          <p className="font-medium">{label}</p>
+                          {payload.map((item) => (
+                            <p key={item.name} className="text-sm">
+                              {item.name}: ${item.value}K
+                            </p>
+                          ))}
+                        </div>
+                      );
+                    }
+
+                    return null;
+                  }}
+                />
+                <Bar dataKey="min" fill="#94a3b8" name="Min Salary (K)" />
+                <Bar dataKey="median" fill="#64748b" name="Median Salary (K)" />
+                <Bar dataKey="max" fill="#475569" name="Max Salary (K)" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card>
           <CardHeader>
-            <CardTitle>
-              Salary Ranges by Role
-            </CardTitle>
+            <CardTitle>Key Industry Trends</CardTitle>
             <CardDescription>
-              Displaying minimum, median, and maximum salaries (in thousands)
+              Current trends shaping the industry
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          data={salaryData}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip content={({active , payload , label})=> {
-if(active && payload && payload.length) {
-  return (
-    <div className="bg-background rounded-lg p-2 border shadow-md">
-      <p className="font-medium">{label}</p>
-      {payload.map((item)=> (
-        <p key={item.name} className="text-sm">
-          {item.name}: ${item.value}K
-        </p>
-      ))}
-    </div>
-  )
-}
-
-return null
-          }}/>
-          <Bar dataKey="min" fill="#94a3b8" name="Min Salary (K)"  />
-          <Bar dataKey="median" fill="#64748b" name="Median Salary (K)"  />
-          <Bar dataKey="max" fill="#475569" name="Max Salary (K)"  />
-        </BarChart>
-      </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
-
-       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-         <Card>
-          <CardHeader>
-            <CardTitle>
-              Key Industry Trends
-            </CardTitle>
-            <CardDescription>
-              Current trends shaping the industry 
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul className="-space-y-4">
-              {insights.keyTrends.map((trend , index)=> (
+            <ul className="space-y-4">
+              {insights.keyTrends.map((trend, index) => (
                 <li key={index} className="flex items-start space-x-2">
-                  <div className="h-2 w-2 mt-2 rounded-full bg-primary">
-                    <span>{trend}</span>
-                  </div>
+                  <div className="h-2 w-2 mt-2 rounded-full bg-primary"></div><span>{trend}</span>
                 </li>
               ))}
             </ul>
-             </CardContent>
+          </CardContent>
         </Card>
+
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0">
-            <CardTitle className="text-[16px] font-medium">
-              Recommended Skills
-            </CardTitle>
-            <CardDescription className="text-sm ">
-             Skills to consider developing
+          <CardHeader>
+            <CardTitle>Recommended Skills</CardTitle>
+            <CardDescription>
+              Skills to consider developing
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
               {insights.recommendedSkills.map((skill) => (
-                <Badge key={skill} variant="outline">{skill}</Badge>
+                <Badge key={skill} variant="outline">
+                  {skill}
+                </Badge>
               ))}
             </div>
-             </CardContent>
+          </CardContent>
         </Card>
-       </div>
+
+      </div>
     </div>
   );
 };
