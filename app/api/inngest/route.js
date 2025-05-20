@@ -1,10 +1,10 @@
 
-import { inngest } from "@/lib/Inngest/client"
+import { inngest } from "@/lib/inngest/client"
 import { serve } from "inngest/next"
 
-export const { GET , POST , PUT , DELETE } = serve({
-        client : inngest,
-        function : [
-                
+export const { GET, POST, PUT, DELETE } = serve({
+        client: inngest,
+        function: [
+
         ]
 })
