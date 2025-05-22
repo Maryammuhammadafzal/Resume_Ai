@@ -8,9 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import useFetch from "@/hooks/use-fetch";
-import { RadioGroup } from "@radix-ui/react-dropdown-menu";
-import { RadioGroupItem } from "@radix-ui/react-radio-group";
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 
@@ -30,6 +30,12 @@ const Quiz = () => {
       setAnswers(new Array(quizData.length).fill(null));
     }
   }, [quizData]);
+
+  const handleAnswer = (answer) => {
+        const newAnswers = [...answers];
+        newAnswers[currentQuestion] = answer;
+        setAnswers(newAnswers);
+  } 
 
   if (generatingQuiz) {
     return <BarLoader className="mt-4" width={"100%"} color="gray" />;
@@ -65,9 +71,13 @@ const Quiz = () => {
           Question {currentQuestion + 1} of {quizData.length}
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
         <p className="text-lg font-medium">{question.question}</p>
-        <RadioGroup  className="space-y-2" >
+        <RadioGroup
+          className="space-y-2"
+          onValueChange={handleAnswer}
+          value={answers[currentQuestion]}
+        >
           {question.options.map((option, index) => {
             return (
               <div className="flex items-center space-x-2" key={index}>
@@ -77,7 +87,8 @@ const Quiz = () => {
             );
           })}
         </RadioGroup>
-        Copy Examples
+
+        {showExplaination && }
       </CardContent>
       <CardFooter>
         <Button className="w-full" onClick={generateQuizFn}>
