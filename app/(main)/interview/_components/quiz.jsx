@@ -1,5 +1,5 @@
 "use client";
-import { generateQuiz } from "@/actions/interview";
+import { generateQuiz, saveQuizResult } from "@/actions/interview";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,13 +17,20 @@ import { BarLoader } from "react-spinners";
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [showExplaination, setShowExplaination] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
 
   const {
     loading: generatingQuiz,
     fn: generateQuizFn,
     data: quizData,
   } = useFetch(generateQuiz);
+
+  const {
+    loading: savingResult,
+    fn: saveQuizResultFn,
+    data: resultData,
+    setData: setResultData,
+  } = useFetch(saveQuizResult);
 
   useEffect(() => {
     if (quizData) {
@@ -32,10 +39,21 @@ const Quiz = () => {
   }, [quizData]);
 
   const handleAnswer = (answer) => {
-        const newAnswers = [...answers];
-        newAnswers[currentQuestion] = answer;
-        setAnswers(newAnswers);
-  } 
+    const newAnswers = [...answers];
+    newAnswers[currentQuestion] = answer;
+    setAnswers(newAnswers);
+  };
+
+  const handleNext = () => {
+    if (currentQuestion < quizData.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setShowExplanation(false);
+    } else {
+      finishQuiz();
+    }
+  };
+
+  const finishQuiz = () => {};
 
   if (generatingQuiz) {
     return <BarLoader className="mt-4" width={"100%"} color="gray" />;
@@ -63,6 +81,8 @@ const Quiz = () => {
   }
 
   const question = quizData[currentQuestion];
+  console.log(question);
+
   return (
     <Card className="mx-2">
       <CardHeader>
@@ -88,11 +108,31 @@ const Quiz = () => {
           })}
         </RadioGroup>
 
-        {showExplaination && }
+        {showExplanation && (
+          <div className="mt-4 p-4 bg-muted rounded-lg">
+            <p className="font-medium">Explaination:</p>
+            <p className="text-muted-foreground">{question.explanation}</p>
+          </div>
+        )}
       </CardContent>
       <CardFooter>
-        <Button className="w-full" onClick={generateQuizFn}>
-          Start Quiz
+        {!showExplanation && (
+          <Button
+            variant="outline"
+            disabled={!answers[currentQuestion]}
+            onClick={() => setShowExplanation(true)}
+          >
+            Show Explanation
+          </Button>
+        )}
+        <Button
+          className="ml-auto"
+          disabled={!answers[currentQuestion]}
+          onClick={handleNext}
+        >
+          {currentQuestion < question.length - 1
+            ? "Next Question"
+            : "Finish Quiz"}
         </Button>
       </CardFooter>
     </Card>
