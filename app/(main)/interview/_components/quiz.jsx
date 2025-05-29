@@ -11,9 +11,10 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import useFetch from "@/hooks/use-fetch";
+import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
-import { toast } from "sonner";
+import { toast } from "sonner"
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -32,7 +33,8 @@ const Quiz = () => {
     data: resultData,
     setData: setResultData,
   } = useFetch(saveQuizResult);
-
+  console.log(resultData);
+  
   useEffect(() => {
     if (quizData) {
       setAnswers(new Array(quizData.length).fill(null));
@@ -54,25 +56,25 @@ const Quiz = () => {
     }
   };
 
-  const calculateScore =() => {
-let correctAnswer = 0
+  const calculateScore = () => {
+    let correctAnswer = 0;
 
-answers.forEach((answer , index) =>  {
-  if (answer === quizData[index].correctAnswer) {
-    correctAnswer++;
-  }
-});
-return (correctAnswer / quizData.length) * 100;
-}
+    answers.forEach((answer, index) => {
+      if (answer === quizData[index].correctAnswer) {
+        correctAnswer++;
+      }
+    });
+    return (correctAnswer / quizData.length) * 100;
+  };
 
   const finishQuiz = async () => {
     const score = calculateScore();
 
     try {
-      await saveQuizResultFn(quizData , answers , score);
-      toast.success("Quiz Complete")
+      await saveQuizResultFn(quizData, answers, score);
+      toast.success("Quiz Complete");
     } catch (error) {
-      toast.error(error.message || "Filed to save Quiz")
+      toast.error(error.message || "Filed to save Quiz");
     }
   };
 
@@ -102,7 +104,6 @@ return (correctAnswer / quizData.length) * 100;
   }
 
   const question = quizData[currentQuestion];
-  console.log(question);
 
   return (
     <Card className="mx-2">
@@ -148,11 +149,13 @@ return (correctAnswer / quizData.length) * 100;
         )}
         <Button
           className="ml-auto"
-          disabled={!answers[currentQuestion]}
+          disabled={!answers[currentQuestion] || savingResult}
           onClick={handleNext}
         >
-          {console.log(currentQuestion , question.length )}
-          
+          {savingResult && 
+            <Loader2 className="mr-2 h-4 w-4" width={"100%"} color="gray" />
+          }
+
           {currentQuestion < quizData.length - 1
             ? "Next Question"
             : "Finish Quiz"}

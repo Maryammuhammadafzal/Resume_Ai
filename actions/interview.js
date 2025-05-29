@@ -54,7 +54,7 @@ Return the response in this JSON format only, no additional text:
         }
 };
 
-export const saveQuizResult = async (questions, answers, score) => {
+export const saveQuizResult = async (questions , answers, score) => {
         const { userId } = await auth();
 
         if (!userId) throw new Error("Unauthorized");
@@ -104,20 +104,20 @@ Don't explicitly mention the mistakes, instead focus on what to learn/practice.
                 }
 
                 try {
-                        const assesment = await db.assesment.create({
-                                data : {
-                                        userId : user.id,
+                        const assesment = await db.assessments.create({
+                                data: {
+                                        userId: user.id,
                                         quizScore: score,
-                                        questions: questionResults,
+                                        question: questionResults,
                                         category: "Technical",
                                         improvementTip,
                                 }
                         })
                         return assesment;
                 } catch (error) {
-                        console.log("Error assesment " , error.message);
-                       throw new Error("Error assesment " , error.message);
-                        
+                        console.log("Error assesment ", error.message);
+                        throw new Error(`Error assessment: ${error.message}`);
+
                 }
         }
 };
