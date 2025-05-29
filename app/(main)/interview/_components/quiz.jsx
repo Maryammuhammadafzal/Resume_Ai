@@ -13,6 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import useFetch from "@/hooks/use-fetch";
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
+import { toast } from "sonner";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -53,7 +54,27 @@ const Quiz = () => {
     }
   };
 
-  const finishQuiz = () => {};
+  const calculateScore =() => {
+let correctAnswer = 0
+
+answers.forEach((answer , index) =>  {
+  if (answer === quizData[index].correctAnswer) {
+    correctAnswer++;
+  }
+});
+return (correctAnswer / quizData.length) * 100;
+}
+
+  const finishQuiz = async () => {
+    const score = calculateScore();
+
+    try {
+      await saveQuizResultFn(quizData , answers , score);
+      toast.success("Quiz Complete")
+    } catch (error) {
+      toast.error(error.message || "Filed to save Quiz")
+    }
+  };
 
   if (generatingQuiz) {
     return <BarLoader className="mt-4" width={"100%"} color="gray" />;
