@@ -1,6 +1,6 @@
 import { CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Trophy } from "lucide-react";
+import { CheckCircle2, Trophy, XCircle } from "lucide-react";
 import React from "react";
 
 const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
@@ -26,10 +26,21 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
         )}
 
         <div className="space-y-4">
-                <h3 className="font-medium">Questions Review</h3>
-                {result.questions.map(()=> {
-
-                })}
+          <h3 className="font-medium">Questions Review</h3>
+          {result.questions.map(() => {
+            <div>
+              <div>
+                <p className="font-medium">
+                        {q.question}
+                </p>
+                {q.isCorrect ? (
+                        <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
+                ) : (
+                        <XCircle className="h-5 w-5 text-red-500 flex-shrink-0"/>
+                )}
+              </div>
+            </div>;
+          })}
         </div>
       </CardContent>
     </div>
