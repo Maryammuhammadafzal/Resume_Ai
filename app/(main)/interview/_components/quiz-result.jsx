@@ -1,4 +1,5 @@
-import { CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { CardContent, CardFooter } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle2, Trophy, XCircle } from "lucide-react";
 import React from "react";
@@ -28,21 +29,35 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
         <div className="space-y-4">
           <h3 className="font-medium">Questions Review</h3>
           {result.questions.map(() => {
-            <div>
-              <div>
-                <p className="font-medium">
-                        {q.question}
-                </p>
+            <div className="border rounded-lg p-4 space-y-2">
+              <div className="flex justify-between items-start gap-2">
+                <p className="font-medium">{q.question}</p>
                 {q.isCorrect ? (
-                        <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
+                  <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
                 ) : (
-                        <XCircle className="h-5 w-5 text-red-500 flex-shrink-0"/>
+                  <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
                 )}
+              </div>
+
+              <div className="text-sm text-muted-foreground">
+                <p>Your Answer: {q.userAnswer}</p>
+                {!q.isCorrect && <P>Correct Answer: {q.answer}</P>}
+              </div>
+
+              <div className="text-sm text-muted-foreground">
+                <p className="font-medium">Explanation:</p>
+                <p >{q.explanation}</p>
               </div>
             </div>;
           })}
         </div>
       </CardContent>
+
+      {!hideStartNew && (
+        <CardFooter>
+                <Button onClick={onStartNew} className="w-full" >Start New Quiz</Button>
+        </CardFooter>
+      )}
     </div>
   );
 };
