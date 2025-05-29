@@ -28,7 +28,7 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
         <div className="space-y-4">
           <h3 className="font-medium">Questions Review</h3>
-          {result.questions.map(() => {
+          {result.questions.map((q) => {
             <div className="border rounded-lg p-4 space-y-2">
               <div className="flex justify-between items-start gap-2">
                 <p className="font-medium">{q.question}</p>
@@ -46,7 +46,7 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
               <div className="text-sm text-muted-foreground">
                 <p className="font-medium">Explanation:</p>
-                <p >{q.explanation}</p>
+                <p>{q.explanation}</p>
               </div>
             </div>;
           })}
@@ -55,7 +55,9 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
       {!hideStartNew && (
         <CardFooter>
-                <Button onClick={onStartNew} className="w-full" >Start New Quiz</Button>
+          <Button onClick={onStartNew} className="w-full">
+            Start New Quiz
+          </Button>
         </CardFooter>
       )}
     </div>
