@@ -130,7 +130,9 @@ const Quiz = () => {
           disabled={!answers[currentQuestion]}
           onClick={handleNext}
         >
-          {currentQuestion < question.length - 1
+          {console.log(currentQuestion , question.length )}
+          
+          {currentQuestion < quizData.length - 1
             ? "Next Question"
             : "Finish Quiz"}
         </Button>
