@@ -78,10 +78,23 @@ const Quiz = () => {
     }
   };
 
+  const startNewQuiz = () => {
+    setCurrentQuestion(0);
+    setAnswers([]);
+    setShowExplanation(false);
+    generateQuizFn();
+    setResultData(null);
+  }
+
   if (generatingQuiz) {
     return <BarLoader className="mt-4" width={"100%"} color="gray" />;
   }
 
+  if (resultData) {
+   return ( <div className="mx-2">
+      <QuizResult result={resultData} onStartNew={startNewQuiz} />
+    </div>)
+  }
   if (!quizData) {
     return (
       <Card className="mx-2">
@@ -153,7 +166,7 @@ const Quiz = () => {
           onClick={handleNext}
         >
           {savingResult && 
-            <Loader2 className="mr-2 h-4 w-4" width={"100%"} color="gray" />
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" width={"100%"} color="gray" />
           }
 
           {currentQuestion < quizData.length - 1
