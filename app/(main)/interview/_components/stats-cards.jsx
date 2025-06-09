@@ -20,7 +20,7 @@ const StatsCards = ({ assessments }) => {
   const getTotalQuestions = () => {
         if (!assessments?.length) return 0;
          return assessments.reduce(
-      (sum, assessment) => sum + assessment.questions.length,
+      (sum, assessment) => sum + assessment?.questions?.length,
       0
     );
   };
