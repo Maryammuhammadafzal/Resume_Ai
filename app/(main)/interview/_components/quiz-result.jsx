@@ -30,10 +30,9 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
         <div className="space-y-4">
           <h3 className="font-medium">Questions Review</h3>
-          {result.question.map((q) => {
+          {result.question.map((q) => (
             <div className="border rounded-lg p-4 space-y-2">
-              {console.log(q)}
-              <div className="flex justify-between items-start gap-2">
+              <div className="flex w-full justify-between items-start gap-2">
                 <p className="font-medium">{q.question}</p>
                 {q.isCorrect ? (
                   <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
@@ -51,8 +50,8 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
                 <p className="font-medium">Explanation:</p>
                 <p>{q.explanation}</p>
               </div>
-            </div>;
-          })}
+            </div>
+          ))}
         </div>
       </CardContent>
 
