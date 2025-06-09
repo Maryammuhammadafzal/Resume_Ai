@@ -68,7 +68,7 @@ export const saveQuizResult = async (questions , answers, score) => {
         if (!user) throw new Error("User Not Found");
 
         const questionResults = questions.map((q, index) => ({
-                questions: q.question,
+                question: q.question,
                 answer: q.correctAnswer,
                 userAnswer: answers[index],
                 isCorrect: q.correctAnswer === answers[index],
