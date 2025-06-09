@@ -6,6 +6,8 @@ import React from "react";
 
 const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
   if (!result) return null;
+  console.log(result);
+  
   return (
     <div className="mx-auto">
       <h1 className="flex items-center gap-2 text-3xl gradient-title"></h1>
@@ -28,7 +30,7 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
         <div className="space-y-4">
           <h3 className="font-medium">Questions Review</h3>
-          {result.questions.map((q) => {
+          {result.question.map((q) => {
             <div className="border rounded-lg p-4 space-y-2">
               <div className="flex justify-between items-start gap-2">
                 <p className="font-medium">{q.question}</p>

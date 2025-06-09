@@ -54,7 +54,7 @@ Return the response in this JSON format only, no additional text:
         }
 };
 
-export const saveQuizResult = async (questions , answers, score) => {
+export const saveQuizResult = async (questions, answers, score) => {
         const { userId } = await auth();
 
         if (!userId) throw new Error("Unauthorized");
