@@ -121,3 +121,33 @@ Don't explicitly mention the mistakes, instead focus on what to learn/practice.
                 }
         }
 };
+
+export const getAssessments = async() => {
+ const { userId } = await auth();
+
+        if (!userId) throw new Error("Unauthorized");
+
+        const user = await db.user.findUnique({
+                where: {
+                        clerkUserId: userId,
+                },
+        });
+
+        if (!user) throw new Error("User Not Found");
+
+        try {
+                const assessments = await db.assessments.findMany({
+                        where : {
+                                userId : user.id,
+                        },
+                        orderBy : {
+                                createdAt : "asc"
+                        }
+                });
+
+                return assessments;
+        } catch (error) {
+                console.log(`Error fetching assessments ${error.message}`);
+                throw new Error(`Error fetching assessments ${error.message}`);  
+        }
+} 
