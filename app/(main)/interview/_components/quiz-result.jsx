@@ -13,7 +13,7 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
       <h1 className="flex items-center gap-2 text-3xl gradient-title"></h1>
       <Trophy className="h-6 w-6 text-yellow-500" />
 
-      <CardContent>
+      <CardContent className="space-y-4">
         {/* Score Overview */}
         <div className="text-center space-y-2">
           <h3 className="text-2xl font-bold">{result.quizScore.toFixed(1)}%</h3>
@@ -32,6 +32,7 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
           <h3 className="font-medium">Questions Review</h3>
           {result.question.map((q) => {
             <div className="border rounded-lg p-4 space-y-2">
+              {console.log(q)}
               <div className="flex justify-between items-start gap-2">
                 <p className="font-medium">{q.question}</p>
                 {q.isCorrect ? (
@@ -43,7 +44,7 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
               <div className="text-sm text-muted-foreground">
                 <p>Your Answer: {q.userAnswer}</p>
-                {!q.isCorrect && <P>Correct Answer: {q.answer}</P>}
+                {!q.isCorrect && <p>Correct Answer: {q.answer}</p>}
               </div>
 
               <div className="text-sm text-muted-foreground">
