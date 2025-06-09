@@ -108,7 +108,7 @@ Don't explicitly mention the mistakes, instead focus on what to learn/practice.
                                 data: {
                                         userId: user.id,
                                         quizScore: score,
-                                        question: questionResults,
+                                        questions: questionResults,
                                         category: "Technical",
                                         improvementTip,
                                 }
