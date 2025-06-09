@@ -15,9 +15,13 @@ console.log(assessments);
         score: assessment.quizScore,
       }));
 
-      setChartData(formattedData);
+      setChartData(formattedData[0]);
+      
     }
   }, [assessments]);
+
+  console.log(chartData);
+  
 
   return <Card>
         <CardHeader>
