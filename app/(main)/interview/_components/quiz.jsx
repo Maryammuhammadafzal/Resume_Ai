@@ -34,7 +34,6 @@ const Quiz = () => {
     data: resultData,
     setData: setResultData,
   } = useFetch(saveQuizResult);
-  console.log(resultData);
   
   
   useEffect(() => {
