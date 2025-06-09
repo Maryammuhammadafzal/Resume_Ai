@@ -29,8 +29,8 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
         <div className="space-y-4">
           <h3 className="font-medium">Questions Review</h3>
-          {result.question.map((q) => (
-            <div className="border rounded-lg p-4 space-y-2">
+          {result.question.map((q , index) => (
+            <div key={index} className="border rounded-lg p-4 space-y-2">
               <div className="flex w-full justify-between items-start gap-2">
                 <p className="font-medium">{q.question}</p>
                 {q.isCorrect ? (
