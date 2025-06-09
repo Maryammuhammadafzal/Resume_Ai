@@ -6,8 +6,7 @@ import React from "react";
 
 const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
   if (!result) return null;
-  console.log(result);
-  
+
   return (
     <div className="mx-auto">
       <h1 className="flex items-center gap-2 text-3xl gradient-title"></h1>
@@ -46,9 +45,9 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
                 {!q.isCorrect && <p>Correct Answer: {q.answer}</p>}
               </div>
 
-              <div className="text-sm text-muted-foreground">
+              <div className="bg-muted p-2 rounded-lg">
                 <p className="font-medium">Explanation:</p>
-                <p>{q.explanation}</p>
+                <p className="text-muted-foreground">{q.explaination}</p>
               </div>
             </div>
           ))}
@@ -57,7 +56,7 @@ const QuizResult = ({ result, hideStartNew = false, onStartNew }) => {
 
       {!hideStartNew && (
         <CardFooter>
-          <Button onClick={onStartNew} className="w-full">
+          <Button onClick={onStartNew} className="w-full my-2">
             Start New Quiz
           </Button>
         </CardFooter>
